@@ -18,7 +18,7 @@ namespace Fargemannen_GR.View.Symboler
     /// <summary>
     /// Interaction logic for SymbolerMain.xaml
     /// </summary>
-    public partial class SymbolerMain : Window
+    public partial class SymbolerMain : UserControl
     {
         public SymbolerMain()
         {

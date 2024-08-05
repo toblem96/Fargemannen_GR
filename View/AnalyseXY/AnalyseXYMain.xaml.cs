@@ -18,7 +18,7 @@ namespace Fargemannen_GR.View.AnalyseXY
     /// <summary>
     /// Interaction logic for AnalyseXYMain.xaml
     /// </summary>
-    public partial class AnalyseXYMain : Window
+    public partial class AnalyseXYMain : UserControl
     {
         public AnalyseXYMain()
         {

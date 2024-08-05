@@ -18,7 +18,7 @@ namespace Fargemannen_GR.View.Filopplasting
     /// <summary>
     /// Interaction logic for FilopplastingMain.xaml
     /// </summary>
-    public partial class FilopplastingMain : Window
+    public partial class FilopplastingMain : UserControl
     {
         public FilopplastingMain()
         {

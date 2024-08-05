@@ -18,7 +18,7 @@ namespace Fargemannen_GR.View.AnalyseZ
     /// <summary>
     /// Interaction logic for AnalyseZMain.xaml
     /// </summary>
-    public partial class AnalyseZMain : Window
+    public partial class AnalyseZMain : UserControl
     {
         public AnalyseZMain()
         {

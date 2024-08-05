@@ -1,4 +1,4 @@
-﻿<Window x:Class="Fargemannen_GR.View.AnalyseZ.AnalyseZMain"
+﻿<UserControl x:Class="Fargemannen_GR.View.AnalyseZ.AnalyseZMain"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -9,4 +9,4 @@
     <Grid>
             
     </Grid>
-</Window>
+</UserControl>

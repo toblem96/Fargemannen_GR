@@ -28,10 +28,6 @@ namespace Fargemannen_GR.ViewModel.Filopplasting
         #endregion
 
         #region Egenskaper 
-        /// <summary>
-        /// Eksempel med SosiFilePath. Først settes det opp en tom er verdi med _fullSosiFilePath
-        /// </summary>
-
 
         private string _fullSosiFilePath;
         private string _fullSosiIDagenFilePath;
@@ -45,7 +41,6 @@ namespace Fargemannen_GR.ViewModel.Filopplasting
                 _fullSosiFilePath = value;
                 OnPropertyChanged(nameof(SosiFilePath));
                 OnPropertyChanged(nameof(DisplaySosiFilePath));
-                ClearError();
             }
         }
 
@@ -87,13 +82,14 @@ namespace Fargemannen_GR.ViewModel.Filopplasting
                 return parts.Length > 1 ? string.Join("\\", parts.Skip(parts.Length - 2)) : _fullSosiIDagenFilePath;
             }
         }
-
         #endregion
+
 
         #region Kommandoer
         public ICommand UploadSosiCommand {  get; private set; }
         public ICommand UploadSosIDagenCommand { get; private set; }
         #endregion
+
 
         #region Konstruktør 
         private SosiOpplasting()
@@ -102,14 +98,10 @@ namespace Fargemannen_GR.ViewModel.Filopplasting
             UploadSosiCommand = new RelayCommand(UploadSosi);
             UploadSosIDagenCommand = new RelayCommand(UploadSosiIDagen);
         }
-
         #endregion
 
-        #region Metoder
 
-        /// <summary>
-        /// Åpner en filvelger for å laste opp en SOSI-fil og oppdaterer SosiFilePath.
-        /// </summary>
+        #region Metoder
         private void UploadSosi()
         {
             OpenFileDialog fileDialog = new OpenFileDialog
@@ -124,9 +116,7 @@ namespace Fargemannen_GR.ViewModel.Filopplasting
 
         }
 
-        /// <summary>
-        /// Åpner en filvelger for å laste opp en SOSI-dagen-fil og oppdaterer SosidagenFilePath.
-        /// </summary>
+     
         private void UploadSosiIDagen()
         {
             OpenFileDialog fileDialog = new OpenFileDialog
@@ -140,39 +130,12 @@ namespace Fargemannen_GR.ViewModel.Filopplasting
             }
 
         }
-
         #endregion
 
-        #region Feilhåndtering
 
-        /// <summary>
-        /// Feilmelding som kan brukes for visning i UI.
-        /// </summary>
-        private string _errorMessage;
-        public string ErrorMessage
-        {
-            get => _errorMessage;
-            private set
-            {
-                _errorMessage = value;
-                OnPropertyChanged(nameof(ErrorMessage));
-            }
-        }
-
-        /// <summary>
-        /// Tømmer feilmeldingsfeltet.
-        /// </summary>
-        private void ClearError()
-        {
-            ErrorMessage = "";
-        }
-
-        #endregion
 
         #region PropertyChanged
-
         public event PropertyChangedEventHandler PropertyChanged;
-
     
         protected void OnPropertyChanged(string propertyName)
         {
