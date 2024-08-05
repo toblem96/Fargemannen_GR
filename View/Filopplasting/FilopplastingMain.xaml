@@ -4,9 +4,42 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Fargemannen_GR.View.Filopplasting"
+            xmlns:viewModel="clr-namespace:Fargemannen_GR.ViewModel.Filopplasting"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Overskrfit -->
+        <TextBlock Grid.Column="0" Grid.Row="0" FontSize="20" FontFamily="Artifakt Element Heavy" Text="Last opp filer(NB, pass på at alle er i samme koordinatsystem)" Grid.ColumnSpan="2"/>
+        
+        <!-- SOSI File Upload -->
+        <Button Content="Last opp SOSI" Command="{Binding UploadSosiCommand, Source={x:Static viewModel:SosiOpplasting.Instance}}"
+                Grid.Row="1" Grid.Column="0" Margin="5" Padding="5"/>
+
+        <TextBox Text="{Binding DisplaySosiFilePath, UpdateSourceTrigger=PropertyChanged, Mode=OneWay,  Source={x:Static viewModel:SosiOpplasting.Instance}}" Grid.Row="1" Grid.Column="1" Margin="5" Padding="3"/>
+
+        <!-- SOSIDAGEN File Upload -->
+        <Button Content="Last opp Fjell i dagen fra SOSI" Command="{Binding UploadSosIDagenCommand,  Source={x:Static viewModel:SosiOpplasting.Instance}}" Grid.Row="2" Grid.Column="0" Margin="5" Padding="5"/>
+        <TextBox Text="{Binding DisplaySosiIDagenFilePath, UpdateSourceTrigger=PropertyChanged, Mode=OneWay,  Source={x:Static viewModel:SosiOpplasting.Instance}}" Grid.Row="2" Grid.Column="1" Margin="5" Padding="3"/>
+
     </Grid>
+    
 </Window>
