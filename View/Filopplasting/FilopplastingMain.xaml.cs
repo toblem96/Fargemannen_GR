@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Fargemannen_GR.ViewModel.Filopplasting;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,7 @@ namespace Fargemannen_GR.View.Filopplasting
         public FilopplastingMain()
         {
             InitializeComponent();
+            
         }
     }
 }

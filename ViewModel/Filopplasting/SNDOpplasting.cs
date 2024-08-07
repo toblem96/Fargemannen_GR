@@ -62,14 +62,17 @@ namespace Fargemannen_GR.ViewModel.Filopplasting
         #endregion
 
         #region Commands
-        public ICommand UploadSndFolderCommand { get; }
+        public ICommand UploadSndFolderCommand { get; private set; }
         #endregion
 
         #region Constructor
         public SNDOpplasting()
         {
             UploadSndFolderCommand = new RelayCommand<SndFolderMapping>(UploadSndFolder);
-            SndFolderMappings = new ObservableCollection<SndFolderMapping>();
+            SndFolderMappings = new ObservableCollection<SndFolderMapping>
+            {
+                new SndFolderMapping() // Initial tom mapping for å starte
+            };
             _folderData = new Dictionary<int, FolderData>();
         }
         #endregion
@@ -77,8 +80,8 @@ namespace Fargemannen_GR.ViewModel.Filopplasting
         #region Methods
         private void UploadSndFolder(SndFolderMapping mapping)
         {
-            using (var folderDialog = new FolderBrowserDialog())
-                if (folderDialog.ShowDialog() == DialogResult.OK)
+            var folderDialog = new System.Windows.Forms.FolderBrowserDialog();
+            if (folderDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 mapping.Path = folderDialog.SelectedPath;
 
@@ -90,11 +93,13 @@ namespace Fargemannen_GR.ViewModel.Filopplasting
                 };
                 _folderData[folderNumber] = newFolderData;
 
+                // Sett FolderData-referansen i SndFolderMapping
                 mapping.FolderData = newFolderData;
 
                 // Diagnostisk utskrift for å verifisere registrering av prefiksen
                 System.Diagnostics.Debug.WriteLine($"FolderNumber: {folderNumber}, Prefix: {mapping.Prefix}, Path: {mapping.Path}");
 
+                // Legg til en ny tom mapping for å muliggjøre flere opplastinger
                 SndFolderMappings.Add(new SndFolderMapping());
             }
         }

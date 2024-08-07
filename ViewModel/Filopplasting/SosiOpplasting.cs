@@ -36,6 +36,7 @@ namespace Fargemannen_GR.ViewModel.Filopplasting
         private bool _useCaseProject;
         private bool _useCustomProject;
         private string _customProjectName;
+        private int _minYear = 1800;
 
         public string SosiFilePath
         {
@@ -135,6 +136,20 @@ namespace Fargemannen_GR.ViewModel.Filopplasting
                 UpdateDictionary();
             }
         }
+
+        public int MinYear
+        {
+            get => _minYear;
+            set
+            {
+                if (_minYear != value)
+                {
+                    _minYear = value;
+                    OnPropertyChanged(nameof(MinYear));
+                    UpdateDictionary();
+                }
+            }
+        }
         #endregion
 
         #region Dictionary
@@ -147,6 +162,8 @@ namespace Fargemannen_GR.ViewModel.Filopplasting
             _fileInfo["SosiFilePath"] = SosiFilePath;
             _fileInfo["SosiIDagenFilePath"] = SosiIDagenFilePath;
             _fileInfo["Prefiks"] = UseCustomProject ? CustomProjectName : (UsePDFProject ? "PDF-nummer" : "RapportID");
+            _fileInfo["MinYear"] = MinYear.ToString();
+
         }
         #endregion
 

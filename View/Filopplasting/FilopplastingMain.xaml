@@ -43,7 +43,7 @@
 
 
         <!-- Prefiks og RadioButtons -->
-        <TextBlock Text="Prefiks SOSI" FontSize="15" FontFamily="Artifakt Element Medium" Margin="0,0,0,6" Grid.Row="3" Grid.Column="0"/>
+        <TextBlock Text="Prefiks SOSI" FontSize="15" FontFamily="Artifakt Element Medium" Margin="0,0,0,6" HorizontalAlignment="Center"  Grid.Row="3" Grid.Column="0"/>
 
         <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="1" Margin="0,0,0,0">
             <RadioButton Content="PDF-nummer" GroupName="ProjectType" IsChecked="{Binding UsePDFProject, Mode=TwoWay, Source={x:Static viewModel:SosiOpplasting.Instance}}" Margin="0,5,30,0"/>
@@ -52,6 +52,11 @@
             <TextBox Text="{Binding CustomProjectName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Source={x:Static viewModel:SosiOpplasting.Instance}}" Width="120" IsEnabled="{Binding UseCustomProject, Source={x:Static viewModel:SosiOpplasting.Instance}}" Margin="0,0,0,0" HorizontalAlignment="Left"/>
         </StackPanel>
 
+        <!-- Minimum ÅR -->
+        <TextBlock Text="Minimum år SOSI" FontSize="15" FontFamily="Artifakt Element Medium" Margin="0,0,0,6" Grid.Row="4"   HorizontalAlignment="Center" Grid.Column="0"/>
+        <TextBox Grid.Row="4" Grid.Column="1" Margin="5"  Padding="3"  Width="120"  Text="{Binding MinYear, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Source={x:Static viewModel:SosiOpplasting.Instance}}"  HorizontalAlignment="Left"/>
+
+        <!-- SND opplasting -->
         <ItemsControl Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" ItemsSource="{Binding SndFolderMappings, Source={x:Static viewModel:SNDOpplasting.Instance}}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
@@ -59,12 +64,13 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="200"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Button Content="Last opp SND mappe" Command="{Binding DataContext.UploadSndFolderCommand,  RelativeSource={RelativeSource AncestorType=ItemsControl}}" CommandParameter="{Binding}" Grid.Row="0" Grid.Column="0" Margin="5" Padding="5"/>
+                        <Button Content="Last opp SND mappe" Command="{Binding UploadSndFolderCommand, Source={x:Static viewModel:SNDOpplasting.Instance}  }" CommandParameter="{Binding}" Grid.Row="0" Grid.Column="0" Margin="5" Padding="5"/>
                         <TextBox Text="{Binding Path, Mode=OneWay}" Grid.Row="0" Grid.Column="1" Margin="5" Padding="3"/>
                         <TextBlock Text="Prefiks SND-mappe" Grid.Row="1" Grid.Column="0" Margin="5" Padding="5"  FontSize="15" FontFamily="Artifakt Element Medium"/>
                         <TextBox Text="{Binding Prefix, UpdateSourceTrigger=PropertyChanged, Source={x:Static viewModel:SNDOpplasting.Instance}}" Grid.Row="1" Grid.Column="1" Margin="5" Padding="3"/>
@@ -72,9 +78,6 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
-
-
-
     </Grid>
     
 </UserControl>
