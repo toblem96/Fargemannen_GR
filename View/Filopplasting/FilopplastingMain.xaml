@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Fargemannen_GR.View.Filopplasting"
             xmlns:viewModel="clr-namespace:Fargemannen_GR.ViewModel.Filopplasting"
+            
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid >
@@ -28,17 +29,51 @@
         </Grid.ColumnDefinitions>
 
         <!-- Overskrfit -->
-        <TextBlock Grid.Column="0" Grid.Row="0" FontSize="20" FontFamily="Artifakt Element Heavy" Text="Last opp filer(NB, pass på at alle er i samme koordinatsystem)" Grid.ColumnSpan="2"/>
+        <TextBlock Grid.Column="0" Grid.Row="0" FontSize="20" FontFamily="Artifakt Element Heavy" Text="Velg Filer" Grid.ColumnSpan="2"/>
         
         <!-- SOSI File Upload -->
         <Button Content="Last opp SOSI" Command="{Binding UploadSosiCommand, Source={x:Static viewModel:SosiOpplasting.Instance}}"
-                Grid.Row="1" Grid.Column="0" Margin="5" Padding="5"/>
+                Grid.Row="1" Grid.Column="0" Margin="5" Padding="5" />
 
         <TextBox Text="{Binding DisplaySosiFilePath, UpdateSourceTrigger=PropertyChanged, Mode=OneWay,  Source={x:Static viewModel:SosiOpplasting.Instance}}" Grid.Row="1" Grid.Column="1" Margin="5" Padding="3"/>
 
         <!-- SOSIDAGEN File Upload -->
         <Button Content="Last opp Fjell i dagen fra SOSI" Command="{Binding UploadSosIDagenCommand,  Source={x:Static viewModel:SosiOpplasting.Instance}}" Grid.Row="2" Grid.Column="0" Margin="5" Padding="5"/>
         <TextBox Text="{Binding DisplaySosiIDagenFilePath, UpdateSourceTrigger=PropertyChanged, Mode=OneWay,  Source={x:Static viewModel:SosiOpplasting.Instance}}" Grid.Row="2" Grid.Column="1" Margin="5" Padding="3"/>
+
+
+        <!-- Prefiks og RadioButtons -->
+        <TextBlock Text="Prefiks SOSI" FontSize="15" FontFamily="Artifakt Element Medium" Margin="0,0,0,6" Grid.Row="3" Grid.Column="0"/>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="1" Margin="0,0,0,0">
+            <RadioButton Content="PDF-nummer" GroupName="ProjectType" IsChecked="{Binding UsePDFProject, Mode=TwoWay, Source={x:Static viewModel:SosiOpplasting.Instance}}" Margin="0,5,30,0"/>
+            <RadioButton Content="RapportID" GroupName="ProjectType" IsChecked="{Binding UseCaseProject, Mode=TwoWay,Source={x:Static viewModel:SosiOpplasting.Instance}}" Margin="0,5,30,0"/>
+            <RadioButton Content="Egendefinert:" GroupName="ProjectType" IsChecked="{Binding UseCustomProject, Mode=TwoWay, Source={x:Static viewModel:SosiOpplasting.Instance}}" Margin="0,5,10,0"/>
+            <TextBox Text="{Binding CustomProjectName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Source={x:Static viewModel:SosiOpplasting.Instance}}" Width="120" IsEnabled="{Binding UseCustomProject, Source={x:Static viewModel:SosiOpplasting.Instance}}" Margin="0,0,0,0" HorizontalAlignment="Left"/>
+        </StackPanel>
+
+        <ItemsControl Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" ItemsSource="{Binding SndFolderMappings, Source={x:Static viewModel:SNDOpplasting.Instance}}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="200"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Content="Last opp SND mappe" Command="{Binding DataContext.UploadSndFolderCommand,  RelativeSource={RelativeSource AncestorType=ItemsControl}}" CommandParameter="{Binding}" Grid.Row="0" Grid.Column="0" Margin="5" Padding="5"/>
+                        <TextBox Text="{Binding Path, Mode=OneWay}" Grid.Row="0" Grid.Column="1" Margin="5" Padding="3"/>
+                        <TextBlock Text="Prefiks SND-mappe" Grid.Row="1" Grid.Column="0" Margin="5" Padding="5"  FontSize="15" FontFamily="Artifakt Element Medium"/>
+                        <TextBox Text="{Binding Prefix, UpdateSourceTrigger=PropertyChanged, Source={x:Static viewModel:SNDOpplasting.Instance}}" Grid.Row="1" Grid.Column="1" Margin="5" Padding="3"/>
+                    </Grid>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+
 
     </Grid>
     

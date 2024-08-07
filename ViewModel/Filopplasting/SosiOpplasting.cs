@@ -5,6 +5,7 @@ using System.Windows.Input;
 using Microsoft.Win32;
 using GalaSoft.MvvmLight.Command;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace Fargemannen_GR.ViewModel.Filopplasting
 {
@@ -31,6 +32,10 @@ namespace Fargemannen_GR.ViewModel.Filopplasting
 
         private string _fullSosiFilePath;
         private string _fullSosiIDagenFilePath;
+        private bool _usePDFProject;
+        private bool _useCaseProject;
+        private bool _useCustomProject;
+        private string _customProjectName;
 
         public string SosiFilePath
         {
@@ -82,8 +87,68 @@ namespace Fargemannen_GR.ViewModel.Filopplasting
                 return parts.Length > 1 ? string.Join("\\", parts.Skip(parts.Length - 2)) : _fullSosiIDagenFilePath;
             }
         }
+
+        public bool UsePDFProject
+        {
+            get => _usePDFProject;
+            set
+            {
+                if (_usePDFProject == value) return;
+                _usePDFProject = value;
+                OnPropertyChanged(nameof(UsePDFProject));
+                UpdateDictionary();
+            }
+        }
+
+        public bool UseCaseProject
+        {
+            get => _useCaseProject;
+            set
+            {
+                if (_useCaseProject == value) return;
+                _useCaseProject = value;
+                OnPropertyChanged(nameof(UseCaseProject));
+                UpdateDictionary();
+            }
+        }
+
+        public bool UseCustomProject
+        {
+            get => _useCustomProject;
+            set
+            {
+                if (_useCustomProject == value) return;
+                _useCustomProject = value;
+                OnPropertyChanged(nameof(UseCustomProject));
+                UpdateDictionary();
+            }
+        }
+
+        public string CustomProjectName
+        {
+            get => _customProjectName;
+            set
+            {
+                if (_customProjectName == value) return;
+                _customProjectName = value;
+                OnPropertyChanged(nameof(CustomProjectName));
+                UpdateDictionary();
+            }
+        }
         #endregion
 
+        #region Dictionary
+        private Dictionary<string, string> _fileInfo = new Dictionary<string, string>();
+
+        public Dictionary<string, string> FileInfo => _fileInfo;
+
+        private void UpdateDictionary()
+        {
+            _fileInfo["SosiFilePath"] = SosiFilePath;
+            _fileInfo["SosiIDagenFilePath"] = SosiIDagenFilePath;
+            _fileInfo["Prefiks"] = UseCustomProject ? CustomProjectName : (UsePDFProject ? "PDF-nummer" : "RapportID");
+        }
+        #endregion
 
         #region Kommandoer
         public ICommand UploadSosiCommand {  get; private set; }
